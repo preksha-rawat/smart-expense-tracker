@@ -1,26 +1,21 @@
-# Import the Pandas library and give it a short nickname 'pd'
+import streamlit as st
 import pandas as pd
 
-print("--- Reading Data with Pandas ---")
+# Set the title of your web dashboard
+st.title("Smart Expense Tracker & Analyzer")
 
-# Tell Pandas to read your exact file and store it in a DataFrame variable named 'df'
+# Load your dataset
 df = pd.read_csv("data/expense.csv")
 
-# Print the entire DataFrame to the screen
-print(df)
-# select just the 'amount' column and calculate the sum
+# Display the data as an interactive table on the webpage
+st.subheader("My Expense Records")
+st.dataframe(df)
+
+# Calculate and display a financial metric card
 total_spent = df['amount'].sum()
-#print the final total to the sceen
-print("\n--- spending analysis ---")
-print("total spent: ₹", total_spent)
-# Group by category and sum the amounts
-category_spending = df.groupby('category')['amount'].sum()
-
-# Print the category breakdown
-print("\n--- Spending by Category ---")
-print(category_spending)
-# Find the largest number in the amount column
-highest_expense = df['amount'].max()
-
-print("\n--- Quick Insights ---")
-print("Highest single expense: ₹", highest_expense)
+st.metric(label="Total Money Spent", value=f"₹ {total_spent}")
+# group data by category for ou chart
+category_df = df.groupby("category")["amount"].sum()
+# display a subheader and the bar chart
+st.subheader("spending by category")
+st.bar_chart(category_df)
