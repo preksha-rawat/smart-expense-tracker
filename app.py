@@ -14,7 +14,11 @@ if "last_date" not in st.session_state:
     st.session_state.last_date = datetime.date.today()
 
 # Section 1: Manual Expense Input Form
-st.subheader("➕ Add a New Expense")
+st.subheader("➕ Ad" \
+"" \
+"" \
+"" \
+"d a New Expense")
 with st.form("expense_form", clear_on_submit=True):
     col1, col2, col3 = st.columns(3)
     with col1:
